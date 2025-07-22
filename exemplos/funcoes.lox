@@ -1,0 +1,48 @@
+// Funções para demonstrar diferentes conceitos
+fun saudacao(nome) {
+    return "Olá, " + nome + "!";
+}
+
+fun soma(a, b) {
+    return a + b;
+}
+
+fun maximo(a, b) {
+    if (a > b) {
+        return a;
+    } else {
+        return b;
+    }
+}
+
+// Testando as funções
+print saudacao("Alice");
+print saudacao("Bob");
+
+print "5 + 3 = " + soma(5, 3);
+print "Máximo entre 10 e 7: " + maximo(10, 7);
+
+// Função com variáveis locais
+fun calcular() {
+    var x = 10;
+    var y = 20;
+    var resultado = x * y;
+    print "Resultado local: " + resultado;
+    return resultado;
+}
+
+var valor = calcular();
+print "Valor retornado: " + valor;
+
+// Demonstração de escopo
+var global = "variável global";
+
+fun testarEscopo() {
+    var local = "variável local";
+    print "Dentro da função: " + global;
+    print "Dentro da função: " + local;
+}
+
+testarEscopo();
+print "Fora da função: " + global;
+// print local; // Isto causaria erro - variável não definida

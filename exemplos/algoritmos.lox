@@ -1,0 +1,125 @@
+// Algoritmo de ordenação Bubble Sort
+fun trocar(array, i, j) {
+    var temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+}
+
+fun bubbleSort(size) {
+    // Simulação de array usando variáveis numeradas
+    // Em Lox real, implementaríamos com uma estrutura de dados apropriada
+    
+    // Dados de exemplo (hardcoded para demonstração)
+    var arr0 = 64;
+    var arr1 = 34;
+    var arr2 = 25;
+    var arr3 = 12;
+    var arr4 = 22;
+    var arr5 = 11;
+    var arr6 = 90;
+    
+    print "Array original:";
+    print arr0 + " " + arr1 + " " + arr2 + " " + arr3 + " " + arr4 + " " + arr5 + " " + arr6;
+    
+    // Bubble sort simplificado (demonstração conceitual)
+    var trocou = true;
+    while (trocou) {
+        trocou = false;
+        
+        // Comparações manuais para demonstração
+        if (arr0 > arr1) {
+            var temp = arr0;
+            arr0 = arr1;
+            arr1 = temp;
+            trocou = true;
+        }
+        if (arr1 > arr2) {
+            var temp = arr1;
+            arr1 = arr2;
+            arr2 = temp;
+            trocou = true;
+        }
+        if (arr2 > arr3) {
+            var temp = arr2;
+            arr2 = arr3;
+            arr3 = temp;
+            trocou = true;
+        }
+        if (arr3 > arr4) {
+            var temp = arr3;
+            arr3 = arr4;
+            arr4 = temp;
+            trocou = true;
+        }
+        if (arr4 > arr5) {
+            var temp = arr4;
+            arr4 = arr5;
+            arr5 = temp;
+            trocou = true;
+        }
+        if (arr5 > arr6) {
+            var temp = arr5;
+            arr5 = arr6;
+            arr6 = temp;
+            trocou = true;
+        }
+    }
+    
+    print "Array ordenado:";
+    print arr0 + " " + arr1 + " " + arr2 + " " + arr3 + " " + arr4 + " " + arr5 + " " + arr6;
+}
+
+// Busca binária conceitual
+fun buscaBinaria(valor) {
+    // Array ordenado hardcoded para demonstração
+    var arr0 = 11;
+    var arr1 = 12;
+    var arr2 = 22;
+    var arr3 = 25;
+    var arr4 = 34;
+    var arr5 = 64;
+    var arr6 = 90;
+    
+    var inicio = 0;
+    var fim = 6;
+    var encontrado = false;
+    
+    print "Procurando por: " + valor;
+    
+    while (inicio <= fim and !encontrado) {
+        var meio = (inicio + fim) / 2;
+        meio = meio - (meio % 1); // Simular floor()
+        
+        var valorMeio;
+        if (meio == 0) valorMeio = arr0;
+        if (meio == 1) valorMeio = arr1;
+        if (meio == 2) valorMeio = arr2;
+        if (meio == 3) valorMeio = arr3;
+        if (meio == 4) valorMeio = arr4;
+        if (meio == 5) valorMeio = arr5;
+        if (meio == 6) valorMeio = arr6;
+        
+        print "Verificando posição " + meio + " (valor: " + valorMeio + ")";
+        
+        if (valorMeio == valor) {
+            print "Valor encontrado na posição " + meio;
+            encontrado = true;
+        } else if (valorMeio < valor) {
+            inicio = meio + 1;
+        } else {
+            fim = meio - 1;
+        }
+    }
+    
+    if (!encontrado) {
+        print "Valor não encontrado";
+    }
+}
+
+// Executar os algoritmos
+print "=== BUBBLE SORT ===";
+bubbleSort(7);
+
+print "\n=== BUSCA BINÁRIA ===";
+buscaBinaria(25);
+buscaBinaria(99);

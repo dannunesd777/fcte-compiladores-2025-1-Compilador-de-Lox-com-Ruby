@@ -1,0 +1,21 @@
+// Variáveis e expressões básicas
+var nome = "Lox";
+var versao = 1.0;
+var ativo = true;
+
+print "Linguagem: " + nome;
+print "Versão: " + versao;
+print "Ativo: " + ativo;
+
+// Operações matemáticas
+var a = 10;
+var b = 5;
+print "Soma: " + (a + b);
+print "Subtração: " + (a - b);
+print "Multiplicação: " + (a * b);
+print "Divisão: " + (a / b);
+
+// Comparações
+print "a > b: " + (a > b);
+print "a == b: " + (a == b);
+print "a != b: " + (a != b);

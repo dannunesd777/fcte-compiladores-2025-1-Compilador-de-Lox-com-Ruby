@@ -1,0 +1,29 @@
+// Estruturas de controle: if/else
+var idade = 25;
+
+if (idade >= 18) {
+    print "Maior de idade";
+} else {
+    print "Menor de idade";
+}
+
+// Estruturas de controle: while
+var contador = 1;
+print "Contando até 5:";
+while (contador <= 5) {
+    print contador;
+    contador = contador + 1;
+}
+
+// Estruturas de controle: for
+print "Números pares de 0 a 10:";
+for (var i = 0; i <= 10; i = i + 2) {
+    print i;
+}
+
+// Operadores lógicos
+var x = true;
+var y = false;
+print "x and y: " + (x and y);
+print "x or y: " + (x or y);
+print "not x: " + (!x);

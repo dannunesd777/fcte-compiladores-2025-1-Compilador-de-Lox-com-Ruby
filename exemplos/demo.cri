@@ -1,0 +1,21 @@
+# Demo da linguagem CRi
+# Demonstração das capacidades do interpretador
+
+print 1 + 2 + 3 + 4 + 5
+
+# Expressão complexa com precedência
+print 2 + 3 * 4 ^ 2 - 1
+
+# Teste de parênteses
+print (1 + 2) * (3 + 4)
+
+# Operadores unários
+print -(-42)
+print +(5 - 3)
+
+# Divisão e decimais
+print 22 / 7
+print 3.14159 * 2
+
+# Potenciação aninhada (associativa à direita)
+print 2 ^ 3 ^ 2

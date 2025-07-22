@@ -1,0 +1,25 @@
+# Operações matemáticas avançadas
+# Demonstra capacidades matemáticas da linguagem CRi
+
+# Operações unárias
+print +42
+print -42
+print +(3 + 4)
+print -(5 - 2)
+
+# Combinação de operadores unários e binários
+print -2 + 3
+print -(2 + 3)
+print +2 * -3
+print -(2 * 3)
+
+# Expressões aninhadas com unários
+print -(2 + 3) * +(4 - 1)
+print +(-2 ^ 3)
+print -(+2 ^ -3)
+
+# Testando precedência com unários
+print -2 ^ 2
+print (-2) ^ 2
+print 2 ^ -2
+print 2 ^ (-2)

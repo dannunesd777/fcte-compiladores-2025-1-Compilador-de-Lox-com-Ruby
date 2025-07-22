@@ -1,0 +1,6 @@
+# Hello World em CRi
+# Demonstra a operação básica de impressão
+
+print 42
+print 3.14
+print 2 + 2

@@ -1,0 +1,2 @@
+# No external dependencies required
+# CRi interpreter uses only Python standard library

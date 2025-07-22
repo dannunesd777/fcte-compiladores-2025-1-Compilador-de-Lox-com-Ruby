@@ -11,7 +11,7 @@ Este projeto foi desenvolvido como trabalho da disciplina de Compiladores, atend
 |         Nome          | Matrícula   |     Turma     |
 |-----------------------|-------------|---------------|
 |  Daniel Nunes Duarte  |   211062910 |  Turma 1-16h  |
-| Gabriel Augusto V. V. Rocha | 221022533 | Turma 3-18h |
+| [Insira o nome 2]     | [Insira matrícula 2] | [Turma 2-18h]     |
 
 
 ## Introdução

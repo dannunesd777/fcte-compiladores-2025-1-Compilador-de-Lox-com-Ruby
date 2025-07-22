@@ -1,32 +1,25 @@
-// Algoritmo de ordenação Bubble Sort
-fun trocar(array, i, j) {
-    var temp = array[i];
-    array[i] = array[j];
-    array[j] = temp;
-}
-
-fun bubbleSort(size) {
-    // Simulação de array usando variáveis numeradas
-    // Em Lox real, implementaríamos com uma estrutura de dados apropriada
-    
-    // Dados de exemplo (hardcoded para demonstração)
+// Algoritmos de ordenação e busca simplificados
+fun bubbleSort() {
+    // Dados de exemplo
     var arr0 = 64;
     var arr1 = 34;
     var arr2 = 25;
     var arr3 = 12;
     var arr4 = 22;
-    var arr5 = 11;
-    var arr6 = 90;
     
     print "Array original:";
-    print arr0 + " " + arr1 + " " + arr2 + " " + arr3 + " " + arr4 + " " + arr5 + " " + arr6;
+    print arr0;
+    print arr1;
+    print arr2;
+    print arr3;
+    print arr4;
     
-    // Bubble sort simplificado (demonstração conceitual)
+    // Bubble sort simplificado (5 elementos)
     var trocou = true;
     while (trocou) {
         trocou = false;
         
-        // Comparações manuais para demonstração
+        // Primeira passada
         if (arr0 > arr1) {
             var temp = arr0;
             arr0 = arr1;
@@ -51,75 +44,95 @@ fun bubbleSort(size) {
             arr4 = temp;
             trocou = true;
         }
-        if (arr4 > arr5) {
-            var temp = arr4;
-            arr4 = arr5;
-            arr5 = temp;
-            trocou = true;
-        }
-        if (arr5 > arr6) {
-            var temp = arr5;
-            arr5 = arr6;
-            arr6 = temp;
-            trocou = true;
-        }
     }
     
     print "Array ordenado:";
-    print arr0 + " " + arr1 + " " + arr2 + " " + arr3 + " " + arr4 + " " + arr5 + " " + arr6;
+    print arr0;
+    print arr1;
+    print arr2;
+    print arr3;
+    print arr4;
 }
 
-// Busca binária conceitual
-fun buscaBinaria(valor) {
-    // Array ordenado hardcoded para demonstração
-    var arr0 = 11;
-    var arr1 = 12;
-    var arr2 = 22;
-    var arr3 = 25;
-    var arr4 = 34;
-    var arr5 = 64;
-    var arr6 = 90;
-    
-    var inicio = 0;
-    var fim = 6;
-    var encontrado = false;
+// Busca linear simples
+fun buscaLinear(valor) {
+    // Array ordenado 
+    var arr0 = 12;
+    var arr1 = 22;
+    var arr2 = 25;
+    var arr3 = 34;
+    var arr4 = 64;
     
     print "Procurando por: " + valor;
     
-    while (inicio <= fim and !encontrado) {
-        var meio = (inicio + fim) / 2;
-        meio = meio - (meio % 1); // Simular floor()
-        
-        var valorMeio;
-        if (meio == 0) valorMeio = arr0;
-        if (meio == 1) valorMeio = arr1;
-        if (meio == 2) valorMeio = arr2;
-        if (meio == 3) valorMeio = arr3;
-        if (meio == 4) valorMeio = arr4;
-        if (meio == 5) valorMeio = arr5;
-        if (meio == 6) valorMeio = arr6;
-        
-        print "Verificando posição " + meio + " (valor: " + valorMeio + ")";
-        
-        if (valorMeio == valor) {
-            print "Valor encontrado na posição " + meio;
-            encontrado = true;
-        } else if (valorMeio < valor) {
-            inicio = meio + 1;
-        } else {
-            fim = meio - 1;
-        }
+    var encontrado = false;
+    var posicao = -1;
+    
+    if (arr0 == valor) {
+        encontrado = true;
+        posicao = 0;
+    }
+    if (arr1 == valor) {
+        encontrado = true;
+        posicao = 1;
+    }
+    if (arr2 == valor) {
+        encontrado = true;
+        posicao = 2;
+    }
+    if (arr3 == valor) {
+        encontrado = true;
+        posicao = 3;
+    }
+    if (arr4 == valor) {
+        encontrado = true;
+        posicao = 4;
     }
     
-    if (!encontrado) {
+    if (encontrado) {
+        print "Valor encontrado na posição " + posicao;
+    } else {
         print "Valor não encontrado";
     }
 }
 
+// Função para calcular máximo de uma lista
+fun encontrarMaximo() {
+    var arr0 = 15;
+    var arr1 = 42;
+    var arr2 = 7;
+    var arr3 = 23;
+    var arr4 = 8;
+    
+    print "Números: " + arr0 + ", " + arr1 + ", " + arr2 + ", " + arr3 + ", " + arr4;
+    
+    var maximo = arr0;
+    
+    if (arr1 > maximo) {
+        maximo = arr1;
+    }
+    if (arr2 > maximo) {
+        maximo = arr2;
+    }
+    if (arr3 > maximo) {
+        maximo = arr3;
+    }
+    if (arr4 > maximo) {
+        maximo = arr4;
+    }
+    
+    print "Maior número: " + maximo;
+}
+
 // Executar os algoritmos
 print "=== BUBBLE SORT ===";
-bubbleSort(7);
+bubbleSort();
 
-print "\n=== BUSCA BINÁRIA ===";
-buscaBinaria(25);
-buscaBinaria(99);
+print "";
+print "=== BUSCA LINEAR ===";
+buscaLinear(25);
+buscaLinear(99);
+
+print "";
+print "=== ENCONTRAR MÁXIMO ===";
+encontrarMaximo();

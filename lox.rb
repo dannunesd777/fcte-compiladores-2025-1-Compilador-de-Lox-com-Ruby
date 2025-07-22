@@ -79,8 +79,6 @@ class Lox
       end
     end
 
-    public
-
     def runtime_error(error)
       puts "#{error.message}\n[line #{error.token.line}]"
       @had_runtime_error = true

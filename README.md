@@ -1,9 +1,11 @@
 # Interpretador da Linguagem Lox em Ruby
 
-## Integrantes
-- **Nome:** [Insira o nome do estudante]
-- **Matrícula:** [Insira a matrícula]  
-- **Turma:** [Insira a turma]
+## 🧑‍🎓Integrantes
+|         Nome          | Matrícula   |     Turma     |
+|-----------------------|-------------|---------------|
+|  Daniel Nunes Duarte  |   211062910 |  Turma 1-16h  |
+| [Insira o nome 2]     | [Insira matrícula 2] | [Turma 2-18h]     |
+
 
 ## Introdução
 

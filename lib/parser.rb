@@ -2,6 +2,10 @@
 
 require_relative "token"
 require_relative "ast"
+require_relative "token_type"
+require_relative "lox_error"
+require_relative "expr"
+require_relative "stmt"
 
 # Parser performs syntax analysis, building an AST from tokens
 class Parser

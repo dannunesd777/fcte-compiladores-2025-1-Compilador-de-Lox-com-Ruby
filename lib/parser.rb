@@ -370,7 +370,9 @@ class Parser
   end
 
   def error(token, message)
-    Lox.error(token, message)
+    if defined?(Lox)
+      Lox.error(token, message)
+    end
     ParseError.new
   end
 

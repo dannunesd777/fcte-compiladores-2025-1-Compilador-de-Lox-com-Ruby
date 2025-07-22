@@ -25,8 +25,11 @@ class LoxScanningError < LoxError
 end
 
 class LoxRuntimeError < LoxError
-  def initialize(message, line = -1)
+  attr_reader :token
+  def initialize(message, token = nil)
+    line = token.respond_to?(:line) ? token.line : -1
     super("Runtime Error: #{message}", line)
+    @token = token
   end
 end
 

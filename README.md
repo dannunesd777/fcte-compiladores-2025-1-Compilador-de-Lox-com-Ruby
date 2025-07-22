@@ -1,10 +1,17 @@
+
+
+
+## Escopo e Organização
+
+Este projeto foi desenvolvido como trabalho da disciplina de Compiladores, atendendo ao escopo de implementar um **interpretador completo para uma linguagem de programação simples** (Lox). O objetivo é exercitar as etapas clássicas de construção de linguagens: análise léxica, sintática, semântica e execução, além de demonstrar organização modular, exemplos didáticos e testes automatizados. O repositório está estruturado conforme as orientações da disciplina, com README detalhado, exemplos variados, referências, estrutura de código clara e documentação de bugs/limitações.
+
 # Interpretador da Linguagem Lox em Ruby
 
 ## 🧑‍🎓Integrantes
 |         Nome          | Matrícula   |     Turma     |
 |-----------------------|-------------|---------------|
 |  Daniel Nunes Duarte  |   211062910 |  Turma 1-16h  |
-| [Insira o nome 2]     | [Insira matrícula 2] | [Turma 2-18h]     |
+| Gabriel Augusto V. V. Rocha | 221022533 | Turma 3-18h |
 
 
 ## Introdução
@@ -16,7 +23,7 @@ Este projeto implementa um interpretador completo para a linguagem de programaç
 A linguagem Lox implementada neste projeto possui as seguintes características:
 
 - **Tipagem dinâmica**: Variáveis não precisam de declaração de tipo
-- **Tipos de dados básicos**: números (float), strings, booleanos (true/false) e nil
+- **Tipos de dados básicos**: números (inteiros e floats), strings, booleanos (true/false) e nil
 - **Variáveis**: Declaração com `var` e atribuição com `=`
 - **Expressões aritméticas**: +, -, *, / com precedência adequada
 - **Expressões lógicas**: and, or, ! (not)
@@ -25,7 +32,7 @@ A linguagem Lox implementada neste projeto possui as seguintes características:
 - **Funções**: Declaração com `fun`, parâmetros, valores de retorno
 - **Escopo de variáveis**: Escopo léxico com ambientes aninhados
 - **Recursão**: Suporte completo a funções recursivas
-- **Função built-in**: `clock()` para obter timestamp atual
+- **Funções built-in**: `clock()` para timestamp, `pi()` para PI, `abs()` para valor absoluto
 
 ### Exemplos de Sintaxe
 
@@ -67,6 +74,44 @@ O interpretador utiliza as técnicas clássicas de implementação de linguagens
 2. **Análise Sintática (Parser)**: Constrói Árvore Sintática Abstrata (AST) usando recursive descent parsing
 3. **Interpretação (Tree-walking Interpreter)**: Executa a AST usando o padrão Visitor
 4. **Gerenciamento de Ambiente**: Implementa escopo léxico com ambientes aninhados
+
+## Como Rodar
+
+1. **Pré-requisito:** Ruby >= 3.0.0 instalado na máquina.
+2. **Instale as dependências (opcional, para desenvolvimento):**
+   ```bash
+   bundle install
+   ```
+3. **Execute um exemplo:**
+   ```bash
+   ruby lox.rb exemplos/hello.lox
+   ```
+   Ou rode qualquer outro exemplo da pasta `exemplos/`:
+   ```bash
+   ruby lox.rb exemplos/fibonacci.lox
+   ruby lox.rb exemplos/algoritmos.lox
+   ruby lox.rb exemplos/abs.lox
+   # ...
+   ```
+4. **REPL interativo:**
+   ```bash
+   ruby lox.rb
+   ```
+
+## Como Rodar os Testes
+
+O projeto possui testes automatizados de unidade e integração utilizando RSpec. Para rodar todos os testes:
+
+1. Certifique-se de ter instalado as dependências de desenvolvimento:
+   ```bash
+   bundle install
+   ```
+2. Execute:
+   ```bash
+   rspec
+   ```
+
+Os testes estão localizados na pasta `spec/` e cobrem análise léxica, sintática e integração do interpretador.
 
 ## Instalação
 
@@ -129,11 +174,37 @@ ruby lox.rb exemplos/fibonacci.lox
 ```
 Implementa funções recursivas para calcular Fibonacci e fatorial.
 
+
 ### 6. Algoritmos Avançados (`algoritmos.lox`)
 ```bash
 ruby lox.rb exemplos/algoritmos.lox
 ```
 Implementa algoritmos mais complexos como ordenação (bubble sort conceitual) e busca binária.
+
+### 7. Tipos e Concatenação (`tipos.lox`)
+```bash
+ruby lox.rb exemplos/tipos.lox
+```
+Mostra uso de inteiros, floats, booleanos e concatenação de strings.
+
+
+### 8. Funções Nativas (`nativos.lox`)
+```bash
+ruby lox.rb exemplos/nativos.lox
+```
+Demonstra uso das funções nativas `clock()`, `pi()` e outras.
+
+### 9. Valor Absoluto (`abs.lox`)
+```bash
+ruby lox.rb exemplos/abs.lox
+```
+Exemplo de uso da função nativa `abs()` para valor absoluto de inteiros e floats.
+
+### 10. Erros em Tempo de Execução (`erros.lox`)
+```bash
+ruby lox.rb exemplos/erros.lox
+```
+Exemplos de erros: divisão por zero e operação inválida entre tipos.
 
 ## Referências
 
@@ -238,7 +309,17 @@ O projeto está organizado nos seguintes módulos principais:
 
 ### Problemas Conhecidos
 
-1. **Concatenação de Strings**: Embora funcional, a concatenação automática pode mascarar erros de tipo em alguns casos
-2. **Números sempre Float**: Todos os números são tratados como float, não há distinção entre inteiros e decimais
-3. **Sem Validação de Overflow**: Não há verificação de overflow em operações aritméticas
-4. **REPL Limitado**: O REPL não mantém estado entre comandos para declarações que precisam de múltiplas linhas 
+**[Resolvidos]**
+1. **Concatenação de Strings**: Agora só é permitida concatenação automática se ambos os operandos forem strings, ou ambos números. Se um for string e outro não, será feita conversão explícita, evitando mascarar erros de tipo.
+2. **Validação de Overflow**: Soma, subtração, multiplicação e divisão agora verificam overflow e resultados inválidos (infinito ou NaN), lançando erro apropriado.
+3. **REPL Aprimorado**: O REPL agora aceita múltiplas linhas e só executa o código ao pressionar Enter duas vezes, permitindo declarações multi-linha e mantendo o estado entre comandos.
+
+
+# 🚦 Status do Projeto
+
+✔️ Interpretador funcional e testado
+✔️ Todos os exemplos da pasta `exemplos/` executam corretamente
+✔️ Testes unitários e de integração (RSpec) passam sem falhas
+✔️ Modularização e documentação completas
+
+---

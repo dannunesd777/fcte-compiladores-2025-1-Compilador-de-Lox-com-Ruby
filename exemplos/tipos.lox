@@ -1,0 +1,13 @@
+// Demonstração de tipos: inteiros, floats, booleanos e concatenação
+var inteiro = 42;
+var decimal = 3.14;
+var texto = "O resultado é: ";
+var booleano = true;
+
+print inteiro;
+print decimal;
+print texto + inteiro;
+print texto + decimal;
+print "Verdadeiro? " + booleano;
+print "Soma: " + (inteiro + decimal);
+print "Concatenação: " + ("abc" + "def");

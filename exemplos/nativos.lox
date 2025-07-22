@@ -1,0 +1,3 @@
+// Exemplos de uso de funções nativas
+print clock(); // Deve imprimir o timestamp atual
+print pi();     // Deve imprimir o valor de PI

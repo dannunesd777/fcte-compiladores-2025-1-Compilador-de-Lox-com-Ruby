@@ -1,19 +1,18 @@
-# frozen_string_literal: true
 
+# frozen_string_literal: true
+# Interpretador principal da linguagem Lox em Ruby
+
+
+
+require_relative "lox_callable"
 require_relative "environment"
 require_relative "ast"
+require_relative "lox_error"
+require_relative "abs_function"
 
-# Runtime error for Lox execution
-class LoxRuntimeError < StandardError
-  attr_reader :token
 
-  def initialize(token, message)
-    super(message)
-    @token = token
-  end
-end
 
-# Return value exception for function returns
+# Exceção para retorno de função
 class Return < StandardError
   attr_reader :value
 
@@ -23,18 +22,8 @@ class Return < StandardError
   end
 end
 
-# Callable interface for functions
-class LoxCallable
-  def arity
-    raise NotImplementedError
-  end
 
-  def call(interpreter, arguments)
-    raise NotImplementedError
-  end
-end
-
-# Lox function implementation
+# Implementação de função definida pelo usuário
 class LoxFunction < LoxCallable
   def initialize(declaration, closure)
     @declaration = declaration
@@ -47,17 +36,14 @@ class LoxFunction < LoxCallable
 
   def call(interpreter, arguments)
     environment = Environment.new(@closure)
-    
     @declaration.params.each_with_index do |param, index|
       environment.define(param.lexeme, arguments[index])
     end
-
     begin
       interpreter.execute_block(@declaration.body, environment)
     rescue Return => return_value
       return return_value.value
     end
-
     nil
   end
 
@@ -66,29 +52,35 @@ class LoxFunction < LoxCallable
   end
 end
 
-# Built-in clock function
+# Função nativa clock()
 class ClockFunction < LoxCallable
-  def arity
-    0
-  end
-
-  def call(interpreter, arguments)
+  def arity; 0; end
+  def call(_interpreter, _arguments)
     Time.now.to_f
   end
+  def to_s; "<native fn>"; end
+end
 
-  def to_s
-    "<native fn>"
+# Exemplo de função nativa extra: retorna PI
+class PiFunction < LoxCallable
+  def arity; 0; end
+  def call(_interpreter, _arguments)
+    Math::PI
   end
+  def to_s; "<native fn>"; end
 end
 
 # Interpreter executes the AST using the visitor pattern
+
+# Interpretador principal
 class Interpreter
   def initialize
     @globals = Environment.new
     @environment = @globals
-
-    # Define native functions
+    # Funções nativas
     @globals.define("clock", ClockFunction.new)
+    @globals.define("pi", PiFunction.new)
+    @globals.define("abs", AbsFunction.new)
   end
 
   def interpret(statements)
@@ -195,7 +187,7 @@ class Interpreter
       check_number_operands(expr.operator, left, right)
       left - right
     when TokenType::PLUS
-      if left.is_a?(Float) && right.is_a?(Float)
+      if (left.is_a?(Float) || left.is_a?(Integer)) && (right.is_a?(Float) || right.is_a?(Integer))
         left + right
       elsif left.is_a?(String) && right.is_a?(String)
         left + right
@@ -204,10 +196,11 @@ class Interpreter
       elsif right.is_a?(String)
         stringify(left) + right
       else
-        raise LoxRuntimeError.new(expr.operator, "Operands must be two numbers or two strings.")
+        raise LoxRuntimeError.new("Operands must be two numbers or two strings.", expr.operator)
       end
     when TokenType::SLASH
       check_number_operands(expr.operator, left, right)
+      raise LoxRuntimeError.new("Division by zero.", expr.operator) if right == 0 || right == 0.0
       left / right
     when TokenType::STAR
       check_number_operands(expr.operator, left, right)
@@ -221,12 +214,11 @@ class Interpreter
     arguments = expr.arguments.map { |arg| evaluate(arg) }
 
     unless callee.is_a?(LoxCallable)
-      raise LoxRuntimeError.new(expr.paren, "Can only call functions and classes.")
+      raise LoxRuntimeError.new("Can only call functions and classes.", expr.paren)
     end
 
     if arguments.length != callee.arity
-      raise LoxRuntimeError.new(expr.paren, 
-        "Expected #{callee.arity} arguments but got #{arguments.length}.")
+      raise LoxRuntimeError.new("Expected #{callee.arity} arguments but got #{arguments.length}.", expr.paren)
     end
 
     callee.call(self, arguments)
@@ -293,34 +285,31 @@ class Interpreter
   end
 
   def check_number_operand(operator, operand)
-    return if operand.is_a?(Float)
-
-    raise LoxRuntimeError.new(operator, "Operand must be a number.")
+    return if operand.is_a?(Float) || operand.is_a?(Integer)
+    raise LoxRuntimeError.new("Operand must be a number.", operator)
   end
 
   def check_number_operands(operator, left, right)
-    return if left.is_a?(Float) && right.is_a?(Float)
-
-    raise LoxRuntimeError.new(operator, "Operands must be numbers.")
+    return if (left.is_a?(Float) || left.is_a?(Integer)) && (right.is_a?(Float) || right.is_a?(Integer))
+    raise LoxRuntimeError.new("Operands must be numbers.", operator)
   end
 
   def stringify(object)
     return "nil" if object.nil?
-
     if object.is_a?(Float)
       text = object.to_s
       text = text.chomp(".0") if text.end_with?(".0")
       return text
     end
-
-    if object.is_a?(TrueClass)
+    if object.is_a?(Integer)
+      return object.to_s
+    end
+    if object == true
       return "true"
     end
-
-    if object.is_a?(FalseClass)
+    if object == false
       return "false"
     end
-
     object.to_s
   end
 end

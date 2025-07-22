@@ -1,0 +1,4 @@
+// Exemplo de uso da função nativa abs()
+print abs(-10); // 10
+print abs(3.5 - 7.5); // 4.0
+print abs(0); // 0

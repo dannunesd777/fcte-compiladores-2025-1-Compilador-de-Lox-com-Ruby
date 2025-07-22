@@ -1,0 +1,3 @@
+// Demonstração de erros em tempo de execução
+print 10 / 0; // Deve lançar erro de divisão por zero
+print "abc" - 1; // Deve lançar erro de tipos

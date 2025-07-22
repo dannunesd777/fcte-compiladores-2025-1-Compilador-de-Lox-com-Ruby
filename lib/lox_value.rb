@@ -1,5 +1,7 @@
+
 # lox_value.rb
 # Representação de valores e objetos Lox em Ruby
+require_relative "lox_callable"
 
 class LoxValue
   attr_reader :type, :value
@@ -37,7 +39,7 @@ class LoxString
   end
 end
 
-class LoxFunction
+class LoxFunctionValue
   attr_reader :name, :arity, :body
   def initialize(name, arity, body)
     @name = name
@@ -45,7 +47,7 @@ class LoxFunction
     @body = body
   end
   def to_s
-    "<function #{@name}>"
+    "<function \\#{@name}>"
   end
 end
 

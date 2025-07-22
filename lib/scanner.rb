@@ -88,7 +88,9 @@ class Scanner
       elsif alpha?(c)
         identifier
       else
-        Lox.error(@line, "Unexpected character: #{c}")
+    if defined?(Lox)
+      Lox.error(@line, "Unexpected character: #{c}")
+    end
       end
     end
   end

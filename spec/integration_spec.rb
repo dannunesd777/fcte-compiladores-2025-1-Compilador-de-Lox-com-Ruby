@@ -1,3 +1,5 @@
+# Garantir que funções nativas estejam disponíveis
+require_relative "../lib/abs_function"
 # frozen_string_literal: true
 
 require_relative "../lox"

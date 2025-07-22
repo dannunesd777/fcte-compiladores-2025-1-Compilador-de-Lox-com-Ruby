@@ -67,16 +67,21 @@ class Lox
     end
 
     def run_prompt
-      puts "Lox Interactive REPL"
-      puts "Type 'exit' to quit."
-      
+      buffer = ""
+      puts "Digite código Lox. Pressione Enter duas vezes para executar. Ctrl+C para sair."
       loop do
         print "> "
         line = gets
-        break if line.nil? || line.strip == "exit"
-
-        run(line)
-        @had_error = false
+        break if line.nil?
+        if line.strip.empty?
+          unless buffer.strip.empty?
+            run(buffer)
+            buffer = ""
+            @had_error = false
+          end
+        else
+          buffer += line
+        end
       end
     end
 
@@ -107,7 +112,7 @@ class Lox
     end
 
     def runtime_error(error)
-      puts "#{error.message}\n[line #{error.token.line}]"
+      puts error.message
       @had_runtime_error = true
     end
 

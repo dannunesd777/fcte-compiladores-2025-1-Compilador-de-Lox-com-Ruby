@@ -4,6 +4,33 @@
 require_relative "lib/scanner"
 require_relative "lib/parser"
 require_relative "lib/interpreter"
+require_relative "lib/token"
+require_relative "lib/token_type"
+require_relative "lib/lox_error"
+require_relative "lib/expr"
+require_relative "lib/stmt"
+require_relative "lib/lox_value"
+
+
+if ARGV.length > 0
+  source = File.read(ARGV[0])
+  scanner = Scanner.new(source)
+  tokens = scanner.scan_tokens
+  parser = Parser.new(tokens)
+  statements = parser.parse
+  interpreter = Interpreter.new
+  interpreter.interpret(statements)
+else
+  puts "Digite código Lox. CTRL+D para sair."
+  interpreter = Interpreter.new
+  while line = $stdin.gets
+    scanner = Scanner.new(line)
+    tokens = scanner.scan_tokens
+    parser = Parser.new(tokens)
+    statements = parser.parse
+    interpreter.interpret(statements)
+  end
+end
 
 # Main Lox interpreter class
 class Lox
